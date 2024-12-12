@@ -44,7 +44,7 @@ public class DispararCanyonazo : MonoBehaviour
 
     private void OnMouseDown(){
         // Instanciar la bala
-        GameObject balaInstanciada = Instantiate(prefabBala, posInicial.transform.position, Quaternion.identity);
+        balaInstanciada = Instantiate(prefabBala, posInicial.transform.position, Quaternion.identity);
 
         balaInstanciada.name = "Bala"; // !!! 
 

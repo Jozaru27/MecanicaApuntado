@@ -44,7 +44,7 @@ public class DispararBala : MonoBehaviour
 
     private void OnMouseDown(){
         // Instanciar el prefab de la bala en la posición inicial
-        GameObject balaInstanciada = Instantiate(prefabBala, posInicial.transform.position, Quaternion.identity);
+        balaInstanciada = Instantiate(prefabBala, posInicial.transform.position, Quaternion.identity);
 
         balaInstanciada.name = "Bala"; // !!! 
 
