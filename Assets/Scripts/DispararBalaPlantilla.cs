@@ -18,7 +18,7 @@ public class DispararBala : MonoBehaviour
     // Al inicio del Script
     void Start(){
         posInicial = GameObject.Find("PuntoDeDisparo");         // De donde sale la bala
-        posFinal = GameObject.Find("PuntoDeDisparoFinal");      // A donde apunta la bala
+        posFinal = GameObject.Find("Cruceta");                  // A donde apunta la bala
         canyon = GameObject.Find("Cuerpo");                     // Nombre del objeto del cañón (Cilindro en la escena)
     }
 

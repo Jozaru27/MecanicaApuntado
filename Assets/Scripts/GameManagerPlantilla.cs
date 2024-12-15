@@ -8,10 +8,30 @@ public class GameManager : MonoBehaviour
     static public GameObject numBalasText;
     static int numBalas = 0;
 
+    GameObject[] posicionesDiana;
+    GameObject   diana;
+    public GameObject dianaPrefab;
+
     void Start()
     {
         // Buscar el GO del texto
         numBalasText = GameObject.Find("TextoBalas");
+
+        // recupero los 5 elementos para la diana
+        posicionesDiana = GameObject.FindGameObjectsWithTag("respawnDiana");
+
+        // ESTA LLAMADA LA TENEIS QUE SUSTITUIR POR UN INSTANTIATE
+        // diana = GameObject.Find("Diana");
+
+        // MOVER LA ESFERA A UNA POSICI�N ALEATORIA
+        int tamanyoArrayDianas = posicionesDiana.Length; // tama�o = 5
+        int numeroAleatorio    = Random.Range(0, tamanyoArrayDianas - 1); // rango de 0 a 4
+
+        diana = Instantiate(dianaPrefab, posicionesDiana[numeroAleatorio].transform.position, Quaternion.identity);
+
+        GameObject dianaAleatoria = posicionesDiana[numeroAleatorio];
+        diana.transform.position  = dianaAleatoria.transform.position;
+    
     }
 
     void Update()
@@ -37,5 +57,11 @@ public class GameManager : MonoBehaviour
     static public void DecNumBalas()
     {
 
+    }
+
+    public void MoverDiana()
+    {
+        int numeroAleatorio = Random.Range(0, posicionesDiana.Length);
+        diana.transform.position = posicionesDiana[numeroAleatorio].transform.position;
     }
 }
