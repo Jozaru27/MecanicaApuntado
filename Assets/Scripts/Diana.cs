@@ -27,8 +27,11 @@ public class Diana : MonoBehaviour
         // YA NO - (opcional) verificar si el objeto que colisionó tiene la etiqueta "Bala" //tocó cambiar el colision detection a continuous
         // cada vez que las colisiones chocan, aumenta el número de impactos. llama a la función Mover Diana.
         if (collision.gameObject.CompareTag("Bala")){
-           
+
             impactosDiana++;
+
+            Destroy(collision.gameObject);
+            GameManager.DecNumBalas();
 
             gameManager.MoverDiana();
         }

@@ -5,7 +5,7 @@ using UnityEngine;
 public class MovimientoCruceta : MonoBehaviour
 {
     public float velocidadMovimientoCruceta = 15f; 
-    public Vector2 limitesY = new Vector2(1.5f, 9f); // Límites para el eje Y
+    public Vector2 limitesY = new Vector2(3.5f, 9f); // Límites para el eje Y
     public Vector2 limitesZ = new Vector2(-7.5f, 7.5f); // Límites para el eje Z
 
     // Start is called before the first frame update
