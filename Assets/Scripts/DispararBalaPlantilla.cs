@@ -15,6 +15,9 @@ public class DispararBala : MonoBehaviour
     public Material materialInstanciado; //necesario para poder cambiar el material del objeto
     public Transform objetoPadre; 
     
+    public bool BotonPulsado = false;
+    public float TiempoPulsado = 0;
+    
     // Al inicio del Script
     void Start(){
         posInicial = GameObject.Find("PuntoDeDisparo");         // De donde sale la bala
@@ -24,6 +27,14 @@ public class DispararBala : MonoBehaviour
 
     // Actualiza el script cada frame
     void Update(){
+
+        if (BotonPulsado)
+        {
+            TiempoPulsado += Time.deltaTime;
+        }
+
+        GameManager.UpdatePotencia(TiempoPulsado);
+
         // Si la bala no es nula (o sea, que está instanciada)
         if (balaInstanciada != null) {
             // calcular la distancia entre la bala y el cañón
@@ -43,6 +54,15 @@ public class DispararBala : MonoBehaviour
 
 
     private void OnMouseDown(){
+
+        BotonPulsado = true;
+
+    }
+
+    private void OnMouseUp()
+    {
+        BotonPulsado = false;
+
         // Instanciar el prefab de la bala en la posición inicial
         balaInstanciada = Instantiate(prefabBala, posInicial.transform.position, Quaternion.identity);
 
@@ -52,20 +72,18 @@ public class DispararBala : MonoBehaviour
 
         // necesario para mantener las físicas
         Rigidbody rb = balaInstanciada.GetComponent<Rigidbody>();
-        
+
         // Calcular la dirección del disparo (restar posicion inicial al final)
         Vector3 direccion = (posFinal.transform.position - posInicial.transform.position).normalized;
 
         // fuerza
-        rb.AddForce(direccion * 50f, ForceMode.Impulse);
+        rb.AddForce(direccion * 25f * TiempoPulsado, ForceMode.Impulse);
+
+        TiempoPulsado = 0;
+        GameManager.UpdatePotencia(TiempoPulsado);
 
         // avisar al incrementor de balas
         GameManager.IncNumBalas();
     }
-
-    // private void OnCollisionEnter(Collision collision)
-    // {
-        
-    // }
 
 }

@@ -5,13 +5,17 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    // Texto Balas En Escena
+    // Texto Balas Escena
     static public GameObject numBalasText;
     static int numBalas = 0;
 
     // Texto Balas Disparadas
-    static public GameObject numBalasDisparadasText;
-    static int numBalasDisparadas = 0;
+    static public GameObject numDianasText;
+    static int numDianas = 0;
+
+    // Texto Balas Disparadas
+    static public GameObject PotenciaText;
+    static int numPotencia = 0;
 
     // Diana
     GameObject[] posicionesDiana;
@@ -21,8 +25,9 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         // Buscar el GO del texto
-        numBalasText = GameObject.Find("TextoBalas");
         numBalasText = GameObject.Find("TextoBalasDisparadas");
+        numDianasText = GameObject.Find("TextoDianasAcertadas");
+        PotenciaText = GameObject.Find("PotenciaText");
 
         // recupero los 5 elementos para la diana
         posicionesDiana = GameObject.FindGameObjectsWithTag("respawnDiana");
@@ -51,22 +56,21 @@ public class GameManager : MonoBehaviour
         // poner el número de balas a 0 y cambiar el texto 
         numBalas = 0;
         TextMeshProUGUI textoTMP1 = numBalasText.GetComponent<TextMeshProUGUI>();
-        textoTMP1.text = "Balas en Escena: " + numBalas.ToString();
+        textoTMP1.text = "Balas Disparadas: " + numBalas.ToString();
     }
 
     static public void IncNumBalas()
     {
         numBalas++;
         TextMeshProUGUI textoTMP1 = numBalasText.GetComponent<TextMeshProUGUI>();
-        textoTMP1.text = "Balas en Escena: " + numBalas.ToString();
-        numBalasDisparadas++;
+        textoTMP1.text = "Balas Disparadas: " + numBalas.ToString();
     }
 
     static public void DecNumBalas()
     {
         numBalas--;
         TextMeshProUGUI textoTMP1 = numBalasText.GetComponent<TextMeshProUGUI>();
-        textoTMP1.text = "Balas en Escena: " + numBalas.ToString();
+        textoTMP1.text = "Balas Disparadas: " + numBalas.ToString();
     }
 
     public void MoverDiana()
@@ -78,11 +82,21 @@ public class GameManager : MonoBehaviour
 
         Destroy(diana);
 
+        numDianas++;
+
+        TextMeshProUGUI textoTMP1 = numDianasText.GetComponent<TextMeshProUGUI>();
+        textoTMP1.text = "Dianas Aceradas: " + numDianas.ToString();
+
         diana = Instantiate(dianaPrefab, posicionesDiana[numeroAleatorio].transform.position, Quaternion.Euler(0, 90, 0));
 
         GameObject dianaAleatoria = posicionesDiana[numeroAleatorio];
         diana.transform.position = dianaAleatoria.transform.position;
+    }
 
+    static public void UpdatePotencia(float tiempoPulsadoVar)
+    {
 
+        TextMeshProUGUI textoTMP1 = PotenciaText.GetComponent<TextMeshProUGUI>();
+        textoTMP1.text = "Potencia: " + tiempoPulsadoVar.ToString();
     }
 }
